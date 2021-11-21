@@ -1,0 +1,98 @@
+# $Id: TODO 193 2005-03-11 23:12:18Z keescook $
+
+Things that need to be done...
+
+Next
+----
+*Code
+- have PCs shutdown on signal if active, but not sending a page.
+- clean up stale/running test during BecomeDaemon
+- option to not bounce "user not found" errors (to stop domain scanning)
+- have a "quiet" startup mode
+*Docs
+- finish sendpage-manual
+- add info about "snpp-acl"
+- find counting error for tempfail
+- document sendpage-db
+- document DBI schema
+
+Next Next
+---------
+- implement a list of addresses for SNPP server to listen on (for multihomed)
+- do something so that queues that are waiting on a modem will run
+  as soon as the modem is available.  How can I do this when there are
+  multiple modems available?  Weird multi semaphore notifications queues
+  based on modems?  Gah.  Strange.  Only the PCs know about modem use,
+  not the queue manager.  Perhaps another pipe for modem reservations?
+- implement "dialretries" (attempt dialing again for PC)
+- implement character-based translation tables
+- create more fallback PC config options (temp-fail, etc)
+
+
+Would Be Nice
+-------------
+*Code
+- implement SNPP "HOLD" function
+- add warnings when seeing {0x00} chars in modem buffers.  Possible incorrect
+  comm settings 8N1 vs 7E1, etc.
+- do something about the 500 functions packed into "sendpage" instead of
+  cleanly implemented in modules elsewhere.
+- implement email notification fall-back for recips
+- have all the conf files get handled by Makefile.PL  --  /etc dir?
+- change PagingCentral module to deal with modems differently so we don't
+  have to use a KeesConf object.
+- change Recipient module to deal with macros differently so we don't
+  have to use a KeesConf object.
+- figure out how to do filelocking under Windows
+- figure out what to replace my Syslog calls with under Windows
+- add "include" verb to sendpage.cf for sucking in other files?  This allows
+  for separate files for PCs and recip lists.
+- implement "fieldsplits" (fields cannot be split across blocks for PC)
+- handle calculating parity as described by Shaun Dawson (is this needed
+  after the parity improvements in Device::SerialPort?)
+- TCP modems (open a socket instead of a file) by Jim Gottlieb
+- generalize the "xmit message" code to deal with whatever type of sending
+  we're doing, TAP, UCP, SNPP, etc. (from Jon Meek)
+- figure out what the cryptic message "ESC EOT hangups" meant, and fix it
+*Docs
+- update API doc to reflect changes made for PageQueue, Page, and Recipient
+- more general in-code commenting & documentation
+- more API documentation for all the modules via POD
+- write a data flow graph
+
+
+
+Stuff I Thought Of, But Will Most Likely Never Need
+---------------------------------------------------
+- implement multiple TAP protocols? (are there real differences?  PG1, PG3, etc)
+  I don't think I'll ever need this due to the "pc:fields", and "pc:proto"
+  variables.
+
+
+I'm Probably Never Going To Implement These Crazy Ideas
+-------------------------------------------------------
+- if you have A LOT of pages, you'd want multiple modems running for
+  a single PC.  Since that would REALLY be a lot of pages, I'm going to
+  leave out the idea of parallel tasking modems for the same PC.  That
+  seems like insane overkill, but it's something that would be pretty
+  cool for HIGH volume paging centers.  Some day, perhaps.
+
+
+Detailed Notes
+--------------
+Parity - Shaun Dawson
+  After a long struggle, I think I've figured out what's going on here, and
+  have fixed it.  Even though the serial port is being set to even parity, I
+  don't believe that the parity calculations are being done by the system.  I
+  believe that both the incoming and outgoing parity calculations will need to
+  be done inside sendpage.  I added a function to AND out the 8th bit in the
+  incoming byte stream, and I stopped getting garbage from any of the paging
+  terminals, but some subset of the ones I had problems with didn't see the
+  0x0D byte I sent, and so didn't return 'ID='.  This led me to conclude that
+  some of the paging terminals set to even parity just did the same thing that
+  I did, which was to AND out the parity bit (and those worked fine), but some
+  others discarded bytes with invalid parity.  Since 0x0D has an odd parity,
+  that byte was discarded, and sendpage was never able to negotiate with those
+  terminals.
+
+

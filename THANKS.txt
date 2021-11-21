@@ -1,0 +1,131 @@
+This file contains a mostly order-less list of people I have to thank for
+help with the Sendpage project.  When I can remember what they did in
+particular, I've noted it.
+	-Kees Cook <kees@outflux.net>, http://outflux.net/
+
+
+Mark Fullmer
+        For creating the original Sendpage and making it open source.  :)
+
+
+Jerry Paul Taft
+	Born Israel Kotchka 8/10/45 in Russia
+	Died 6/21/00 in Chicago
+
+	He was a camper and counselor for many years at Camp Chi in
+	Wisconsin.  He was offered a graduate fellowship in philosophy
+	at Stanford University. He opposed the war in Vietnam.  He was
+	a co-founder of the Revolutionary Automobile Cooperative in
+	Chicago and worked as a mechanic there.  He drove a cab.  He
+	lived and worked on Kibbutz Be'eri in Israel. He struggled for
+	almost 30 years with manic-depressive illness, struggling also
+	to remain as independent as possible.  He loved coffee and
+	cigarettes.  He helped care for his parents when they became
+	ill.  He was a faithful friend.  He remained opposed to
+	injustice and nonsense his entire life, never lost his ideals,
+	and lived his life with integrity and without pretension.  He
+	will be missed.
+
+
+Karsten Hilbert
+	Notified me of a subtle formatting problem in the modem lock files.
+
+Mark Frey
+	Found a strange bug (in Perl?) where Modem.pm wasn't closing
+	the device on a DESTROY.  Also found where lockfiles made by minicom
+	weren't be handled correctly, and found a bug with the -f option.
+        Found a bug in the 8-bit to 7-bit conversion routine.
+
+Steve Szabo
+	Let me use and abuse his Sun Blade running Solaris 8.  Nailed
+	down the DTR/Termios bug that has plagued me for a year.
+
+Randy Emler
+	Showed me a bug in my select loop.  Turned out to be a few silly
+	typos, but finding them resulted in further debugging additions.
+	Also, donated his postfix configuration documentation.
+
+Noah Meyerhans
+	Helped me notice a typo in sendpage configuration defaults.
+
+Jason Ernst
+	For totally redesigning the sendpage website to make it look great,
+	and for making adorable little raccoon images to go with it.  :)
+
+Steve Brazill
+	Found a bug with PC logon timeouts not failing correctly.
+
+Aaron Moore
+	Found a bug with "nobody" slipping into split pages.
+
+Jonathan C. Detert
+	Found a bug with the "dialout" modem setting.
+
+Todd M. Lewis
+	Suggested a change to comment parsing to allow for leading whitespace.
+	Corrected a parsing bug in email2page.
+
+Jon Scarbrough
+	Found a bug where modem settings were not being passed through
+	correctly (PC default were set instead).
+
+Kendall P. Bullen
+	Always finds my bugs as soon as I release a version.
+
+Philip Moors
+	Found a bug in the Modem disconnect function.  I wasn't actually
+	letting go of the modem on a chat failure.
+
+John Furman
+	Found a setgid taint bug in Modem.pm for me.
+
+Drew Smith
+	Reported and helped me track down a numeric-only paging problem.
+
+Andy Wardley
+	for giving me an API that I liked and adapted for my own use, even
+	if I didn't use any of the code (AppConfig).
+
+Eric Schenk
+	for giving me a clear example of how to create a uucp-style lock file
+	for a serial device.   (And for teaching me about "kill(0, pid)"!)
+
+tomiii
+	for a huge list of PC information.
+
+Kurt Boyack
+	for paging central information.
+
+Aaron Botsis
+	for making me realize that other people besides me, do, in fact,
+	use sendpage.
+
+Paul Holcomb
+	for endless support and encouragement.
+
+Steve Kennedy
+	for always having a patch ready to help me out.
+
+Jason Winget
+	for letting me spam his pager while doing TAP testing.
+
+Steven Bishop
+	for reporting to me that Sendpage works with AIX 4.3.2.
+
+Adrian Steiner
+        for writing UCP support!
+
+Pat Gunn
+        <pgunn@mcleodltd.com>
+        For sending me detailed SCO7 installation notes.
+
+David St. John
+	For hunting down and testing my fix for block-spanning pages.
+	And for donating $100 to the project!  Thanks!
+	David also funded some bug fixing work for weird SNPP hangs.
+	Terrific!
+
+Todd T. Fries
+	Wrote a full DBI-based pager lookup mechanism.  Great!
+
+$Id: THANKS 183 2005-02-24 01:21:07Z nemies $
